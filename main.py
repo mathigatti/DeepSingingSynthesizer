@@ -82,11 +82,12 @@ def main(**kwargs):
         
         sound = AudioSegment.from_file(filename)
 
+        padding_to_remove = int(n*1000*(60/int(tempo)))
+        sound = sound[padding_to_remove:-padding_to_remove]
+        int(n*1000*(60/int(tempo)))
+
         padding_audio = AudioSegment.silent(duration=lenght_in_miliseconds-len(sound))
         sound = sound + padding_audio
-
-        padding_to_remove = int(n*1000*(60/int(tempo)))
-        sound = sound[padding_to_remove:len(sound)-padding_to_remove]
 
         sound.export(filename, format="wav")
     else:
