@@ -1,5 +1,5 @@
-# RealTimeSingingSynthesis
-Real time singing synthesis project made from sinsy-NG.
+# Deep Singing Synthesis
+Extension of Sinsy-NG using deep learning models for voice cloning conversion in order to synthesize good and realistic vocals.
 
 ## Requirements
 - python (Should work on 3 and 2.7 versions)
