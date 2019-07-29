@@ -1,6 +1,8 @@
 __pycache__
 **/*.pyc
-tmp
+**/*.musicxml
+**/*.xml
+**/*.mid
 **/*.wav
 **/*.npz
 **/log
