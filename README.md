@@ -37,12 +37,7 @@ file: the name of the output file
 
 Usage examples
 ```
-python main.py notes=0,0,2 lyrics="hello good morning" dur=1,1,2 lang=en file="output.wav" tempo=80
-
-python main.py lyrics="hola hola hola" lang=es
-
-python main.py # All the default values are used generating a single note audio file which says "Ooh" in spanish
-
+python main.py notes=0,1,2,3,4,5,6 octave=5 lang=en file="trump.wav" tempo=80 model=trump lyrics="hello I am donald trump"
 ```
 
 You can easily modify `main.py` and add notes, duration, language and more as parameters.

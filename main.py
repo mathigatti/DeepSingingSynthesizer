@@ -3,6 +3,7 @@ import sys
 from convertor import convert
 from pydub import AudioSegment
 import math
+from Constants import ROOT_PATH
 
 def main(**kwargs):
 
@@ -52,9 +53,14 @@ def main(**kwargs):
     else:
         octave = 3 # C is the root note
 
-    renderizeVoice(filename,lyrics,notes,durations,tempo,scale,root_note,octave,languageCode)
-
     if 'model' in kwargs:
+        n = 2
+        lyrics = "a "*n + lyrics + " a"*n
+        notes = [0]*n + notes + [0]*n
+        durations = [1]*n + durations + [1]*n
+
+        renderizeVoice(filename,lyrics,notes,durations,tempo,scale,root_note,octave,languageCode)
+
         model = kwargs['model']
 
         sound = AudioSegment.from_file(filename)
@@ -69,8 +75,8 @@ def main(**kwargs):
         print("The file was normalized so now it has {} db as peak value".format(round(max_db),2))
         sound.export(filename, format="wav")
 
-        netA_path = "/media/mathi/Personal/MyBand/2.sound/synthesis/sinsy/RealTimeSingingSynthesis_dl/trained_model/{}/generator_ab.npz".format(model)
-        netB_path = "/media/mathi/Personal/MyBand/2.sound/synthesis/sinsy/RealTimeSingingSynthesis_dl/trained_model/{}/generator_ba.npz".format(model)
+        netA_path = "{}trained_model/{}/generator_ab.npz".format(ROOT_PATH,model)
+        netB_path = "{}trained_model/{}/generator_ba.npz".format(ROOT_PATH,model)
 
         convert(netA_path,netB_path,filename)
         
@@ -79,8 +85,12 @@ def main(**kwargs):
         padding_audio = AudioSegment.silent(duration=lenght_in_miliseconds-len(sound))
         sound = sound + padding_audio
 
-        sound.export(filename, format="wav")
+        padding_to_remove = int(n*1000*(60/int(tempo)))
+        sound = sound[padding_to_remove:len(sound)-padding_to_remove]
 
+        sound.export(filename, format="wav")
+    else:
+        renderizeVoice(filename,lyrics,notes,durations,tempo,scale,root_note,octave,languageCode)
 
 # Run main
 main(**dict(arg.split('=') for arg in sys.argv[1:]))
