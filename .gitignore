@@ -1,0 +1,7 @@
+__pycache__
+**/*.pyc
+synthesisSoftware
+tmp
+**/*.wav
+**/*.npz
+**/log
