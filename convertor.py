@@ -98,6 +98,15 @@ def convert_gpu(gpu,netA_path,netB_path,wave_path):
 
             print('all done')
 
+def convert(netA_path,netB_path,filename):
+    use_gpu = False
+    if use_gpu:
+        gpu_number = int(input('enter GPU number'))
+        convert_gpu(gpu,netA_path,netB_path,wave_path)
+    else:
+        convert_cpu(netA_path,netB_path,wave_path)
+
+
 # Usage example
 # python convertor.py trained_model/generator_ab.npz trained_model/generator_ba.npz audios/a-espeak-test-short.wav
 def main():
