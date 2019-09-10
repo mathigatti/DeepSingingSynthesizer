@@ -23,7 +23,7 @@ def convert_cpu(netA_path,netB_path,wave_path):
 
             gla = GLA()
 
-            print('converting...')
+            print('converting using CPU (Not GPU)...')
             for i in tqdm.tqdm(range(ds.max//dataset.dif)):
                 x_a = ds.get_example(i)
                 x_a = chainer.dataset.convert.concat_examples([x_a], -1)
@@ -69,7 +69,7 @@ def convert_gpu(gpu,netA_path,netB_path,wave_path):
 
             gla = GLA_GPU(batchsize*4)
 
-            print('converting...')
+            print('converting using GPU...')
             l = ds.max//dataset.dif
             for i in tqdm.tqdm(range(0, l, batchsize)):
                 x_a = [ds.get_example(_i) for _i in range(i, min([i+batchsize, l]))]
