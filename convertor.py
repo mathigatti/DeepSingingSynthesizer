@@ -99,7 +99,7 @@ def convert_gpu(gpu,netA_path,netB_path,wave_path):
             print('all done')
 
 def convert(netA_path,netB_path,wave_path):
-    use_gpu = True
+    use_gpu = False
     if use_gpu:
         #gpu_number = int(input('enter GPU number'))
         gpu_number = 0
@@ -114,11 +114,6 @@ def main():
     netB_path = sys.argv[2]
     wave_path = sys.argv[3]
 
-    use_gpu = False
-    if use_gpu:
-        gpu_number = int(input('enter GPU number'))
-        convert_gpu(gpu,netA_path,netB_path,wave_path)
-    else:
-        convert_cpu(netA_path,netB_path,wave_path)
+    convert(netA_path,netB_path,wave_path)
 
 #main()

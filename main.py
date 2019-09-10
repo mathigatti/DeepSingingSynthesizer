@@ -51,20 +51,20 @@ def main(**kwargs):
     if 'octave' in kwargs:
         octave = int(kwargs['octave'])
     else:
-        octave = 3 # C is the root note
+        octave = 5 # C is the root note
 
     if 'model' in kwargs:
-        n = 2
-        lyrics = "a "*n + lyrics + " a"*n
-        notes = [0]*n + notes + [0]*n
-        durations = [1]*n + durations + [1]*n
-
         renderizeVoice(filename,lyrics,notes,durations,tempo,scale,root_note,octave,languageCode)
 
         model = kwargs['model']
 
         sound = AudioSegment.from_file(filename)
         lenght_in_miliseconds = len(sound)
+
+        silence = AudioSegment.silent(duration=5000)
+
+        sound = silence + sound + silence
+
         sound = sound.set_frame_rate(16000)
         sound = sound.apply_gain(-18 - sound.dBFS)
 
@@ -82,9 +82,7 @@ def main(**kwargs):
         
         sound = AudioSegment.from_file(filename)
 
-        padding_to_remove = int(n*1000*(60/int(tempo)))
-        sound = sound[padding_to_remove:-padding_to_remove]
-        int(n*1000*(60/int(tempo)))
+        sound = sound[len(silence):-len(silence)]
 
         padding_audio = AudioSegment.silent(duration=lenght_in_miliseconds-len(sound))
         sound = sound + padding_audio
