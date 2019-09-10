@@ -98,7 +98,7 @@ def convert_gpu(gpu,netA_path,netB_path,wave_path):
 
             print('all done')
 
-def convert(netA_path,netB_path,filename):
+def convert(netA_path,netB_path,wave_path):
     use_gpu = False
     if use_gpu:
         gpu_number = int(input('enter GPU number'))
