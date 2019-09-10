@@ -51,7 +51,7 @@ def convert_gpu(gpu,netA_path,netB_path,wave_path):
 
     with chainer.using_config('train', False):
         with chainer.no_backprop_mode():
-            batchsize = int(input('enter batch size...'))
+            batchsize = 99
             chainer.cuda.get_device_from_id(gpu).use()
 
             ds = dataset.WaveDataset(wave_path, -1, True)
@@ -101,11 +101,11 @@ def convert_gpu(gpu,netA_path,netB_path,wave_path):
 def convert(netA_path,netB_path,wave_path):
     use_gpu = False
     if use_gpu:
-        gpu_number = int(input('enter GPU number'))
-        convert_gpu(gpu,netA_path,netB_path,wave_path)
+        #gpu_number = int(input('enter GPU number'))
+        gpu_number = 0
+        convert_gpu(gpu_number,netA_path,netB_path,wave_path)
     else:
         convert_cpu(netA_path,netB_path,wave_path)
-
 
 # Usage example
 # python convertor.py trained_model/generator_ab.npz trained_model/generator_ba.npz audios/a-espeak-test-short.wav
