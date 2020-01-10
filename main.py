@@ -18,7 +18,7 @@ def main(**kwargs):
         notes = [0]
 
     if "dur" in kwargs:
-        durations = list(map(int,kwargs['dur'].split(",")))
+        durations = list(map(float,kwargs['dur'].split(",")))
     else:
         durations = [1]
 

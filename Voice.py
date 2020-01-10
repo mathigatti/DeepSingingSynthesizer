@@ -15,8 +15,9 @@ def renderizeVoice(outputName,lyrics,notes,durations,tempo,scale,root_note,octav
 	os.system("LD_LIBRARY_PATH=/usr/lib {}sinsyNG -t ".format(ROOT_PATH)+str(tempo)+" -m "+languageCode+" -o " + outputName + " " + VOICE_XML_PROCESSED)
 
 def tokenize(text):
+	print("ME LLEGA ESTO:", text)
 	textSyllables = cleanText(text)
-	return list(filter(lambda x: len(x) > 0, textSyllables.replace(" ", "-").split("-")))
+	return list(filter(lambda x: len(x) > 0, textSyllables.split(" ")))
 
 def cleanText(text):
 	text.replace("\n"," ")

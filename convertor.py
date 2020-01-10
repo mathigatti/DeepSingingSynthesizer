@@ -1,10 +1,10 @@
-import chainer
-import dataset
-import tqdm
-import queue
+#import chainer
+#import dataset
+#import tqdm
+#import queue
 import numpy as np
-from gla.gla_util import GLA
-from nets.models import Generator
+#from gla.gla_util import GLA
+#from nets.models import Generator
 import sys
 
 def convert_cpu(netA_path,netB_path,wave_path):
