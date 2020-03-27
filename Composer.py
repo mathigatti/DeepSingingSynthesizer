@@ -27,12 +27,14 @@ def toList(rhythm, melody, scale, root_note, octave):
     for i in range(len(rhythm)):
         dur = rhythm[i]
 
-        scale_index = melody[i]%scaleSize
-        implicit_octave = melody[i]//scaleSize
+        if melody[i] != -99:
+            scale_index = melody[i]%scaleSize
+            implicit_octave = melody[i]//scaleSize
 
-        note = (scale[scale_index] + 12*(implicit_octave + octave) + root_note)%255
+            note = (scale[scale_index] + 12*(implicit_octave + octave) + root_note)%255
 
-        composition.append((note,dur,volume,time))
+            composition.append((note,dur,volume,time))
+
         time += dur
 
     return composition
