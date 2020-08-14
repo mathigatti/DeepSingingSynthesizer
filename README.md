@@ -18,22 +18,20 @@ You can try `main.py` script as a small singing synthesis example. After running
 
 All the parameters are optional, they contain a default value in case they are not specified. You can specify them in any order when running the program in the command line.
 
-```
-notes: The numerical value of notes in the scale, in C Major would be something like 0:C, 1:D, 2:E, 3:F and so on...
+- _notes_: The numerical value of notes in the scale, in C Major would be something like 0:C, 1:D, 2:E, 3:F and so on...
 The scale is C major by default, it's hardcoded in the main.py file and can be modified.
 
-lyrics: The text where spaces delimit w
+- _lyrics_: The text where spaces delimit w
 
-dur: The BPM of each note
+- _dur_: The BPM of each note
 
-lang: the language code, "es" for spanish and "en" for english.
+- _lang_: the language code, "es" for spanish and "en" for english.
 
 There are several languages supported, can check that here http://espeak.sourceforge.net/languages.html
 
-tempo: The tempo in BPM, 100 by default
+- _tempo_: The tempo in BPM, 100 by default
 
-file: the name of the output file
-```
+- _file_: the name of the output file
 
 Usage examples
 ```
