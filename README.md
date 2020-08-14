@@ -25,15 +25,14 @@ The scale is C major by default, it's hardcoded in the main.py file and can be m
 
 - _dur_: The BPM of each note
 
-- _lang_: the language code, "es" for spanish and "en" for english.
-
-There are several languages supported, can check that here http://espeak.sourceforge.net/languages.html
+- _lang_: the language code, "es" for spanish and "en" for english. There are several languages supported, you can check them [here](http://espeak.sourceforge.net/languages.html).
 
 - _tempo_: The tempo in BPM, 100 by default
 
 - _file_: the name of the output file
 
-Usage examples
+### Usage examples
+
 ```
 python main.py notes=0,1,2,3,4,5,6 octave=5 lang=en file="trump.wav" tempo=80 model=trump lyrics="hello I am donald trump"
 ```
