@@ -2,7 +2,15 @@ from __future__ import absolute_import, print_function
 
 from MidiFactory import createMidi
 import os
+from sys import platform
 from math import ceil
+
+def extendScale(scale,times):
+    scaleAux = scale[:]
+    for i in range(1,times):
+        for note in scaleAux:
+            scale.append(note+12*i)
+    return scale
 
 def matchListsSize(rhythm,melody):
     n_rhythm =len(rhythm)
@@ -14,11 +22,13 @@ def matchListsSize(rhythm,melody):
 
     return rhythm,melody
 
-def toList(rhythm, melody, scale, root_note, octave):
+def toList(rhythm, melody, scale):
 
+    scale = extendScale(scale,2)
     scaleSize = len(scale)
 
     volume = 100
+    baseNote = 60
 
     rhythm, melody = matchListsSize(rhythm,melody)
 
@@ -26,27 +36,25 @@ def toList(rhythm, melody, scale, root_note, octave):
     time = 0
     for i in range(len(rhythm)):
         dur = rhythm[i]
-
-        if melody[i] != -99:
-            scale_index = melody[i]%scaleSize
-            implicit_octave = melody[i]//scaleSize
-
-            note = (scale[scale_index] + 12*(implicit_octave + octave) + root_note)%255
-
-            composition.append((note,dur,volume,time))
-
+        note = scale[melody[i]%scaleSize] + baseNote
+        composition.append((note,dur,volume,time))
         time += dur
 
     return composition
 
-def compose(notes, durations, scale, root_note, octave, new_midi_path, new_musicxml_path):
+def compose(notes,durations,scale, new_midi_path, new_musicxml_path):
 
     print(notes)
     print(durations)
     print(scale)
-    print(root_note)
 
-    composition = toList(durations,notes,scale,root_note,octave)
+    composition = toList(durations,notes,scale)
     print(composition)
     createMidi(new_midi_path, composition)
-    os.system("musescore "+ new_midi_path +" -o " + new_musicxml_path)
+
+    if platform in ["win32","cygwin"]:
+      os.system("MuseScore3.exe "+ new_midi_path +" -o " + new_musicxml_path)
+    elif platform == "darwin":
+      os.system("export QT_QPA_PLATFORM=offscreen && mscore "+ new_midi_path +" -o " + new_musicxml_path)
+    else:
+      os.system("export QT_QPA_PLATFORM=offscreen && musescore "+ new_midi_path +" -o " + new_musicxml_path)
